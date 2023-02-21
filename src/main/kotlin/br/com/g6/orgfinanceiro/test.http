@@ -1,0 +1,25 @@
+####CREATE - MÉTODO HTTP PARA CRIAÇÃO - POST
+POST http://localhost:8080/user
+Content-type: application/json
+{
+"name": "Leticia",
+ "email": "123",
+ "password": "jdsfjdsfl"
+}
+####READ - GET
+GET http://localhost:8080/user/{userId}
+Content-type: application/json
+
+
+####UPDATE - PUT
+Content-type: application/json
+PUT http://localhost:8080/user/{userId}
+{
+"name": "Leticia",
+ "email": "123",
+ "password": "jdsfjdsfl"
+}
+
+####DELETE - DELETE
+Content-type: application/json
+DELETE http://localhost:8080/user/{userId}
