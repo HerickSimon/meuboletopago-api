@@ -8,6 +8,7 @@ import br.com.g6.orgfinanceiro.services.CurrentUserService
 import br.com.g6.orgfinanceiro.services.FilterMovementSpecification
 import br.com.g6.orgfinanceiro.services.MovementService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
 import javax.persistence.EntityNotFoundException
@@ -36,13 +37,14 @@ class MovementController {
     fun getAll(): MutableList<Movement> {
         return repository.findAll()
     }
+    /*
     @GetMapping("/{idMovement}")
     fun getById(@PathVariable("idMovement") idMovement: Long,): Optional<Movement> {
         return repository.findById(idMovement)
     }
 
-    /*
-        @GetMapping("/{id}")
+     */
+    @GetMapping("/{id}")
     fun getById(@PathVariable("idMovement") idMovement: Long): Any {
         val movement = repository.findById(idMovement)
         if (movement.isPresent){
@@ -51,7 +53,7 @@ class MovementController {
             return ResponseEntity.notFound()
         }
     }
-     */
+
 
     @GetMapping("/balance")
     fun getBalance(): BalanceDTO {
