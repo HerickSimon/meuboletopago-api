@@ -45,12 +45,12 @@ class MovementController {
 
      */
     @GetMapping("/{idMovement}")
-    fun getById(@PathVariable("idMovement") idMovement: Long): Any {
+    fun getById(@PathVariable("idMovement") idMovement: Long): ResponseEntity<Movement> {
         val movement = repository.findById(idMovement)
         if (movement.isPresent){
             return ResponseEntity.ok(movement.get())
         } else {
-            return ResponseEntity.notFound()
+            return ResponseEntity.notFound().build()
         }
     }
 
