@@ -44,7 +44,7 @@ class MovementController {
     }
 
      */
-    @GetMapping("/{id}")
+    @GetMapping("/{idMovement}")
     fun getById(@PathVariable("idMovement") idMovement: Long): Any {
         val movement = repository.findById(idMovement)
         if (movement.isPresent){
