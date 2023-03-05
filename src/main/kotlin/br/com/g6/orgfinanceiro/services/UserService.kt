@@ -62,7 +62,7 @@ class UserService {
                 usersLogin.email = user.email
                 usersLogin.password = user.password
                 usersLogin.token = authHeader
-                usersLogin.id = user.id
+                usersLogin.id = user.id!!
 
                 return usersLogin
 
