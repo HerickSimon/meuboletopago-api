@@ -36,10 +36,22 @@ class MovementController {
     fun getAll(): MutableList<Movement> {
         return repository.findAll()
     }
-    @GetMapping("/{id}")
+    @GetMapping("/{idMovement}")
     fun getById(@PathVariable("idMovement") idMovement: Long,): Optional<Movement> {
         return repository.findById(idMovement)
     }
+
+    /*
+        @GetMapping("/{id}")
+    fun getById(@PathVariable("idMovement") idMovement: Long): Any {
+        val movement = repository.findById(idMovement)
+        if (movement.isPresent){
+            return ResponseEntity.ok(movement.get())
+        } else {
+            return ResponseEntity.notFound()
+        }
+    }
+     */
 
     @GetMapping("/balance")
     fun getBalance(): BalanceDTO {
