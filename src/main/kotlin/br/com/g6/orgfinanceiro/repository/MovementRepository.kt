@@ -11,5 +11,5 @@ import java.util.*
 
 @Repository
 interface MovementRepository : JpaRepository<Movement, Long>, JpaSpecificationExecutor<Movement> {
-
+    fun findById(idMovement: Long?): Movement?
 }
