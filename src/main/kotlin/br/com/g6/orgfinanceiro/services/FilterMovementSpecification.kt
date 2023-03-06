@@ -37,10 +37,10 @@ class DefaultFilter(
     }
 }
 
-class FilterMovementSpecification(var dto : MovementDTO = DefaultFilter().getDefault(), var id: Long) : Specification<Movement> {
-
+class FilterMovementSpecification(var dto : MovementDTO = DefaultFilter().getDefault(), var id: Long? = null) : Specification<Movement> {
     override fun toPredicate(root: Root<Movement>, query: CriteriaQuery<*>, builder: CriteriaBuilder): Predicate? {
         val predicates: MutableList<Predicate> = mutableListOf()
+        dto.idUser = id
 
         if(dto == null) return builder.and()
 
@@ -49,7 +49,7 @@ class FilterMovementSpecification(var dto : MovementDTO = DefaultFilter().getDef
 
         if(dto.idUser != null) {
             root.fetches
-            predicates.add(builder.equal(root.get<Users>("user").get<Long>("id"), id));
+            predicates.add(builder.equal(root.get<Users>("user").get<Long>("id"), dto.idUser));
         }
 
         if(dto.descriptionMovement != null)
