@@ -27,7 +27,6 @@ class MovementController {
     @Autowired
     lateinit var repository: MovementRepository
 
-
     @PostMapping("/filter")
     fun findByFilter(@Valid @RequestBody dto: MovementDTO): MutableList<Movement> {
         dto.idUser = currentUserService.getCurrentUser()?.id
@@ -43,6 +42,7 @@ class MovementController {
     fun getById(@PathVariable("idMovement") idMovement: Long,): Optional<Movement> {
         return repository.findById(idMovement)
     }
+
      */
     @GetMapping("/{idMovement}")
     fun getById(@PathVariable("idMovement") idMovement: Long): ResponseEntity<Movement> {

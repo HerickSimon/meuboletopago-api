@@ -3,15 +3,14 @@ package br.com.g6.orgfinanceiro.services
 import br.com.g6.orgfinanceiro.dto.MovementDTO
 import br.com.g6.orgfinanceiro.model.Movement
 import br.com.g6.orgfinanceiro.model.Users
-import com.fasterxml.jackson.annotation.JsonFormat
 import org.springframework.data.jpa.domain.Specification
-import java.time.LocalDate
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
 class FilterMovementSpecification(var dto : MovementDTO) : Specification<Movement> {
+
     override fun toPredicate(root: Root<Movement>, query: CriteriaQuery<*>, builder: CriteriaBuilder): Predicate? {
         val predicates: MutableList<Predicate> = mutableListOf()
 
