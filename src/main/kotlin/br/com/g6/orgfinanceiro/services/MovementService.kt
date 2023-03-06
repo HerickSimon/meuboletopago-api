@@ -76,7 +76,7 @@ class MovementService {
         filter.typeMovement = TypeMovement.RECEITA.toString()
         filter.idUser = user?.id
 
-        var filterMovement = FilterMovementSpecification(filter, user?.id)
+        var filterMovement = FilterMovementSpecification(filter)
         var listCredit = movementRepository.findAll(filterMovement)
         var totalCredit = 0.0
 
@@ -89,7 +89,7 @@ class MovementService {
         filter.typeMovement = TypeMovement.DESPESA.toString()
         filter.idUser = user?.id
 
-        filterMovement = FilterMovementSpecification(filter, user?.id)
+        filterMovement = FilterMovementSpecification(filter)
         var listDebt = movementRepository.findAll(filterMovement)
         var totalDebt = 0.0
 

@@ -11,36 +11,9 @@ import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
-class DefaultFilter(
-    var dueDateIni: LocalDate? = null,
-    var dueDateEnd: LocalDate? = null,
-    var typeMovement: String? = null,
-    var descriptionMovement: String? = null,
-    var idUser: Long? = null,
-    var valueMovementIni: Double? = null,
-    var valueMovementEnd: Double? = null,
-    var wasPaid: Boolean? = null,
-    var idMovement: Long? = null
-) {
-    fun getDefault(): MovementDTO {
-        return MovementDTO(
-                dueDateIni,
-                dueDateEnd,
-                typeMovement,
-                descriptionMovement,
-                idUser,
-                valueMovementIni,
-                valueMovementEnd,
-                wasPaid,
-                idMovement
-            )
-    }
-}
-
-class FilterMovementSpecification(var dto : MovementDTO = DefaultFilter().getDefault(), var id: Long? = null) : Specification<Movement> {
+class FilterMovementSpecification(var dto : MovementDTO) : Specification<Movement> {
     override fun toPredicate(root: Root<Movement>, query: CriteriaQuery<*>, builder: CriteriaBuilder): Predicate? {
         val predicates: MutableList<Predicate> = mutableListOf()
-        dto.idUser = id
 
         if(dto == null) return builder.and()
 
