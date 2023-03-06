@@ -27,12 +27,20 @@ class MovementController {
     @Autowired
     lateinit var repository: MovementRepository
 
-    @PostMapping("/filter")
-    fun findByFilter(@Valid @RequestBody dto: MovementDTO): MutableList<Movement> {
-        dto.idUser = currentUserService.getCurrentUser()?.id
-        var filterMovement = FilterMovementSpecification(dto)
+
+    @GetMapping("/filter/{id}")
+    fun findByFilter(@PathVariable id: Long): MutableList<Movement> {
+        val idFilter = currentUserService.getCurrentUser()?.id
+        var filterMovement = FilterMovementSpecification(id= id)
         return repository.findAll(filterMovement)
     }
+
+//    @PostMapping("/filter")
+//    fun findByFilter(@Valid @RequestBody dto: MovementDTO): MutableList<Movement> {
+//        dto.idUser = currentUserService.getCurrentUser()?.id
+//        var filterMovement = FilterMovementSpecification(dto)
+//        return repository.findAll(filterMovement)
+//    }
     @GetMapping()
     fun getAll(): MutableList<Movement> {
         return repository.findAll()

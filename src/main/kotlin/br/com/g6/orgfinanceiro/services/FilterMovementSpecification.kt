@@ -3,13 +3,41 @@ package br.com.g6.orgfinanceiro.services
 import br.com.g6.orgfinanceiro.dto.MovementDTO
 import br.com.g6.orgfinanceiro.model.Movement
 import br.com.g6.orgfinanceiro.model.Users
+import com.fasterxml.jackson.annotation.JsonFormat
 import org.springframework.data.jpa.domain.Specification
+import java.time.LocalDate
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
-class FilterMovementSpecification(var dto : MovementDTO) : Specification<Movement> {
+class DefaultFilter(
+    var dueDateIni: LocalDate? = null,
+    var dueDateEnd: LocalDate? = null,
+    var typeMovement: String? = null,
+    var descriptionMovement: String? = null,
+    var idUser: Long? = null,
+    var valueMovementIni: Double? = null,
+    var valueMovementEnd: Double? = null,
+    var wasPaid: Boolean? = null,
+    var idMovement: Long? = null
+) {
+    fun getDefault(): MovementDTO {
+        return MovementDTO(
+                dueDateIni,
+                dueDateEnd,
+                typeMovement,
+                descriptionMovement,
+                idUser,
+                valueMovementIni,
+                valueMovementEnd,
+                wasPaid,
+                idMovement
+            )
+    }
+}
+
+class FilterMovementSpecification(var dto : MovementDTO = DefaultFilter().getDefault(), var id: Long) : Specification<Movement> {
 
     override fun toPredicate(root: Root<Movement>, query: CriteriaQuery<*>, builder: CriteriaBuilder): Predicate? {
         val predicates: MutableList<Predicate> = mutableListOf()
@@ -21,7 +49,7 @@ class FilterMovementSpecification(var dto : MovementDTO) : Specification<Movemen
 
         if(dto.idUser != null) {
             root.fetches
-            predicates.add(builder.equal(root.get<Users>("user").get<Long>("id"), dto.idUser));
+            predicates.add(builder.equal(root.get<Users>("user").get<Long>("id"), id));
         }
 
         if(dto.descriptionMovement != null)
